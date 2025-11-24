@@ -239,6 +239,43 @@ function SpaceIntro({ onComplete }) {
       let isTransitioning = false
       const MAX_SCROLL = isMobile ? 50 : 200 // Lower threshold for mobile
       
+      // Touch/Swipe handling for mobile
+      let touchStartY = 0
+      let touchEndY = 0
+      
+      const handleTouchStart = (e) => {
+        touchStartY = e.touches[0].clientY
+      }
+      
+      const handleTouchMove = (e) => {
+        touchEndY = e.touches[0].clientY
+      }
+      
+      const handleTouchEnd = () => {
+        if (!isTransitioning && isMobile) {
+          const swipeDistance = touchStartY - touchEndY
+          
+          // Detect swipe up (scroll down gesture)
+          if (swipeDistance > 50) {
+            isTransitioning = true
+            const element = containerRef.current
+            if (element) {
+              element.style.overflow = 'hidden'
+            }
+            
+            // Quick fade transition on swipe
+            gsap.to(element, {
+              opacity: 0,
+              duration: 0.5,
+              ease: 'power2.inOut',
+              onComplete: () => {
+                onComplete()
+              }
+            })
+          }
+        }
+      }
+      
       const handleScroll = () => {
         const element = containerRef.current
         if (!element || isTransitioning) return
@@ -278,7 +315,7 @@ function SpaceIntro({ onComplete }) {
         }
         
         // Trigger transition when scroll reaches threshold
-        const threshold = isMobile ? 30 : 100
+        const threshold = isMobile ? 20 : 100
         if (scrollY >= threshold && !isTransitioning) {
           isTransitioning = true
           element.style.overflow = 'hidden'
@@ -327,11 +364,22 @@ function SpaceIntro({ onComplete }) {
       const element = containerRef.current
       if (element) {
         element.addEventListener('scroll', handleScroll, { passive: true })
+        
+        if (isMobile) {
+          element.addEventListener('touchstart', handleTouchStart, { passive: true })
+          element.addEventListener('touchmove', handleTouchMove, { passive: true })
+          element.addEventListener('touchend', handleTouchEnd, { passive: true })
+        }
       }
 
       return () => {
         if (element) {
           element.removeEventListener('scroll', handleScroll)
+          if (isMobile) {
+            element.removeEventListener('touchstart', handleTouchStart)
+            element.removeEventListener('touchmove', handleTouchMove)
+            element.removeEventListener('touchend', handleTouchEnd)
+          }
         }
       }
     }
@@ -377,11 +425,30 @@ function SpaceIntro({ onComplete }) {
       </div>
 
       {terminalComplete && (
-        <div className="scroll-hint-intro">
+        <div 
+          className="scroll-hint-intro"
+          onClick={() => {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 968
+            if (isMobile) {
+              const element = containerRef.current
+              if (element) {
+                gsap.to(element, {
+                  opacity: 0,
+                  duration: 0.5,
+                  ease: 'power2.inOut',
+                  onComplete: () => {
+                    onComplete()
+                  }
+                })
+              }
+            }
+          }}
+          style={{ cursor: window.innerWidth < 968 ? 'pointer' : 'default' }}
+        >
           <div className="scroll-mouse">
             <div className="scroll-wheel"></div>
           </div>
-          <span className="hint-text">Scroll to Enter</span>
+          <span className="hint-text">{window.innerWidth < 968 ? 'Swipe or Tap to Enter' : 'Scroll to Enter'}</span>
         </div>
       )}
       
