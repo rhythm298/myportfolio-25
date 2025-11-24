@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --space-dark: #0a0e27;
+  --space-purple: #6366f1;
+  --space-cyan: #06b6d4;
+  --space-pink: #ec4899;
+  --space-blue: #3b82f6;
+  --neon-green: #10b981;
+  --code-yellow: #fbbf24;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: var(--space-dark);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom Cursor */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--space-cyan);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-follower {
+  width: 8px;
+  height: 8px;
+  background: var(--space-cyan);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10001;
+  box-shadow: 0 0 20px var(--space-cyan);
+}
+
+.cursor.active {
+  transform: scale(1.5);
+  border-color: var(--space-pink);
+  box-shadow: 0 0 30px var(--space-pink);
+}
+
+.cursor-follower.active {
+  background: var(--space-pink);
+  box-shadow: 0 0 30px var(--space-pink);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--space-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--space-purple), var(--space-cyan));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--space-cyan), var(--space-purple));
+}
+
+/* Text Selection */
+::selection {
+  background: var(--space-purple);
+  color: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+}
+
+p, a, span {
+  font-family: 'Space Mono', monospace;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Glitch Effect for Text */
+.glitch {
+  position: relative;
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0%, 100% {
+    text-shadow: 
+      -2px 0 var(--space-cyan),
+      2px 0 var(--space-pink);
+  }
+  25% {
+    text-shadow: 
+      2px 0 var(--space-cyan),
+      -2px 0 var(--space-pink);
+  }
+  50% {
+    text-shadow: 
+      -2px 0 var(--space-pink),
+      2px 0 var(--space-cyan);
+  }
+  75% {
+    text-shadow: 
+      2px 0 var(--space-pink),
+      -2px 0 var(--space-cyan);
+  }
+}

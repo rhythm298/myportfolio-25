@@ -1,0 +1,253 @@
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.5rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.navigation.scrolled {
+  background: rgba(10, 14, 39, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  display: flex;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.logo-bracket {
+  color: var(--space-cyan);
+}
+
+.logo-text {
+  background: linear-gradient(135deg, var(--space-purple), var(--space-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-menu li {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-menu li:hover {
+  transform: translateY(-2px);
+}
+
+.nav-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--space-cyan);
+}
+
+.nav-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  position: relative;
+}
+
+.nav-menu li:hover .nav-text::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--space-cyan), var(--space-purple));
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Space Button */
+.space-button {
+  position: relative;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 2px solid var(--space-purple);
+  color: var(--white);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  opacity: 1;
+  visibility: visible;
+  min-width: 180px;
+}
+
+.space-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.button-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.button-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.button-text {
+  white-space: nowrap;
+  min-width: 120px;
+  text-align: center;
+}
+
+.space-button:hover .button-icon {
+  transform: translateX(3px) rotate(-15deg);
+}
+
+.space-button.downloading .button-icon {
+  animation: rocketLaunch 0.6s ease-in-out infinite;
+}
+
+@keyframes rocketLaunch {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-20deg);
+  }
+}
+
+.loading-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 3;
+}
+
+.loading-dots span {
+  width: 4px;
+  height: 4px;
+  background: var(--space-cyan);
+  border-radius: 50%;
+  animation: dotBounce 1.4s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.button-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(99, 102, 241, 0.4), 
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.space-button:hover .button-glow {
+  left: 100%;
+}
+
+.space-button:hover:not(:disabled) {
+  border-color: var(--space-cyan);
+  box-shadow: 
+    0 0 20px rgba(99, 102, 241, 0.5),
+    inset 0 0 20px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+.space-button.downloading {
+  border-color: var(--space-cyan);
+  box-shadow: 
+    0 0 30px rgba(6, 182, 212, 0.6),
+    inset 0 0 20px rgba(6, 182, 212, 0.2);
+  animation: buttonPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(6, 182, 212, 0.6),
+      inset 0 0 20px rgba(6, 182, 212, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(6, 182, 212, 0.8),
+      inset 0 0 30px rgba(6, 182, 212, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .space-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}

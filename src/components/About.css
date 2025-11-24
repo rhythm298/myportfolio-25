@@ -1,0 +1,440 @@
+.about-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 6rem 0;
+  background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+  overflow: hidden;
+}
+
+.about-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.about-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 4rem;
+  color: var(--white);
+}
+
+.title-number {
+  font-family: 'Space Mono', monospace;
+  color: var(--space-cyan);
+  font-size: 2rem;
+}
+
+.title-text {
+  font-weight: 900;
+}
+
+.title-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--space-purple), transparent);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.about-card {
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(99, 102, 241, 0.1), 
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.about-card:hover::before {
+  left: 100%;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--space-cyan);
+  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.about-card h3 {
+  font-size: 1.5rem;
+  color: var(--space-cyan);
+  margin-bottom: 1rem;
+}
+
+.about-card p {
+  font-family: 'Space Mono', monospace;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--space-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+
+.overview-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--white);
+  margin: 1rem 0 2rem 0;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.intro-text {
+  font-size: 1.25rem;
+  font-family: 'Space Mono', monospace;
+  line-height: 1.8;
+}
+
+.highlight {
+  color: var(--space-cyan);
+  font-weight: 700;
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--space-cyan), var(--space-purple));
+}
+
+.about-text p {
+  font-family: 'Space Mono', monospace;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--space-cyan), var(--space-purple), var(--space-pink));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--space-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--space-cyan);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px var(--space-cyan);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 30px var(--space-cyan), 0 0 40px var(--space-cyan);
+  }
+}
+
+.timeline-date {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--space-pink);
+  margin-bottom: 0;
+  grid-column: 1;
+}
+
+.timeline-content {
+  grid-column: 2;
+}
+
+.timeline-content h4 {
+  font-size: 1.25rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+  font-family: 'Space Mono', monospace;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* Timeline Animations */
+.timeline-animation {
+  grid-column: 3;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+}
+
+/* Code Lines Animation (2025 Freelancing) */
+.code-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+}
+
+.code-line {
+  color: var(--space-cyan);
+  opacity: 0;
+  animation: typeLine 3s ease-in-out infinite;
+}
+
+.code-line:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.code-line:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.code-line:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes typeLine {
+  0%, 20% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  25%, 95% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+}
+
+/* Neural Network Animation (2023 AI Research) */
+.neural-network {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuron {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--space-purple);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--space-purple);
+  animation: neuronPulse 2s ease-in-out infinite;
+}
+
+.neuron:nth-child(1) {
+  top: 20%;
+  left: 30%;
+}
+
+.neuron:nth-child(2) {
+  top: 50%;
+  left: 50%;
+  animation-delay: 0.3s;
+}
+
+.neuron:nth-child(3) {
+  top: 70%;
+  left: 30%;
+  animation-delay: 0.6s;
+}
+
+.connection {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--space-cyan), transparent);
+  animation: connectionFlow 2s ease-in-out infinite;
+}
+
+.connection:nth-child(4) {
+  width: 30px;
+  top: 35%;
+  left: 30%;
+  transform: rotate(45deg);
+}
+
+.connection:nth-child(5) {
+  width: 30px;
+  top: 60%;
+  left: 30%;
+  transform: rotate(-45deg);
+  animation-delay: 0.5s;
+}
+
+@keyframes neuronPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes connectionFlow {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Typing Code Animation (2021 Web Developer) */
+.typing-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+}
+
+.cursor-blink {
+  color: var(--neon-green);
+  animation: typing 2s steps(6) infinite;
+}
+
+.tag {
+  color: var(--space-pink);
+  font-size: 1.5rem;
+  animation: rotate 3s ease-in-out infinite;
+}
+
+@keyframes typing {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  0%, 100% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+}
+
+@media (max-width: 968px) {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .timeline-date {
+    grid-column: 1;
+  }
+
+  .timeline-content {
+    grid-column: 1;
+  }
+
+  .timeline-animation {
+    display: none;
+  }
+  
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .about-canvas {
+    width: 100%;
+    opacity: 0.2;
+  }
+}

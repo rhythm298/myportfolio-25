@@ -1,0 +1,10 @@
+main {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}

@@ -1,0 +1,236 @@
+.space-intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at center, #1a1f3a 0%, #0a0e27 100%);
+  z-index: 10000;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.space-intro-container::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.space-intro-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.intro-overlay {
+  position: relative;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.intro-title {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  margin-bottom: 3rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+  display: flex;
+  gap: 0.2em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.intro-name {
+  background: linear-gradient(135deg, #06b6d4, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-dot {
+  color: #ec4899;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.intro-dev {
+  background: linear-gradient(135deg, #ec4899, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Terminal Styling */
+.terminal {
+  width: 95%;
+  max-width: 800px;
+  background: rgba(10, 14, 39, 0.9);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 0 40px rgba(99, 102, 241, 0.3),
+    inset 0 0 20px rgba(99, 102, 241, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.terminal-header {
+  background: rgba(99, 102, 241, 0.2);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-buttons span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.btn-close {
+  background: #ec4899;
+  box-shadow: 0 0 10px #ec4899;
+}
+
+.btn-minimize {
+  background: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.btn-maximize {
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.terminal-title {
+  font-size: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  color: #06b6d4;
+  letter-spacing: 0.05em;
+}
+
+.terminal-body {
+  padding: 2rem;
+  min-height: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.terminal-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  color: #10b981;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+  color: #06b6d4;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.scroll-hint-intro {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: bounce 2s ease-in-out infinite;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10002;
+}
+
+.scroll-mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid #06b6d4;
+  border-radius: 20px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 10px;
+  background: #06b6d4;
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll 1.5s ease-in-out infinite;
+}
+
+@keyframes scroll {
+  0% {
+    top: 8px;
+    opacity: 1;
+  }
+  100% {
+    top: 28px;
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hint-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  color: #06b6d4;
+  letter-spacing: 0.2em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .terminal {
+    max-width: 90%;
+  }
+  
+  .terminal-text {
+    font-size: 0.75rem;
+  }
+}

@@ -1,0 +1,165 @@
+.tech-badges-section {
+  position: relative;
+  padding: 4rem 0 3rem;
+  background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+  overflow: hidden;
+}
+
+.tech-badges-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--space-cyan), 
+    transparent
+  );
+}
+
+.tech-badges-title {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 3rem;
+  letter-spacing: 0.1em;
+}
+
+.title-bracket {
+  color: var(--space-cyan);
+  margin: 0 0.5rem;
+}
+
+.tech-rail {
+  position: relative;
+  overflow: visible;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tech-rail-track {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
+  width: fit-content;
+  will-change: transform;
+}
+
+.tech-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 2rem;
+  min-width: 140px;
+  height: 140px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.tech-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.tech-badge:hover::before {
+  left: 100%;
+}
+
+.tech-icon {
+  font-size: 2.5rem;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 10px var(--badge-color, var(--space-cyan)));
+  opacity: 1 !important;
+}
+
+.tech-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  opacity: 1 !important;
+}
+
+.tech-badge:hover {
+  transform: translateY(-8px) scale(1.08);
+  border-color: var(--badge-color, var(--space-cyan));
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px var(--badge-color, var(--space-cyan));
+  background: rgba(99, 102, 241, 0.15);
+  z-index: 10;
+}
+
+.tech-badge:hover .tech-icon {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 20px var(--badge-color, var(--space-cyan)));
+}
+
+.tech-badge:hover .tech-name {
+  color: #ffffff;
+  text-shadow: 0 0 15px var(--badge-color, var(--space-cyan)),
+               0 0 30px var(--badge-color, var(--space-cyan));
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tech-badge {
+    min-width: 110px;
+    height: 120px;
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .tech-icon {
+    font-size: 2rem;
+  }
+  
+  .tech-name {
+    font-size: 0.75rem;
+  }
+  
+  .tech-rail-track {
+    gap: 1rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .tech-badge,
+  .tech-icon,
+  .scroll-arrow {
+    animation: none !important;
+    transition: none !important;
+  }
+}
