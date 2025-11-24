@@ -18,8 +18,8 @@ function ConstellationCanvas() {
 
     const ctx = canvas.getContext('2d')
     const stars = []
-    const numStars = 150
-    const connectionDistance = 150
+    const numStars = 400
+    const connectionDistance = 120
     const mouseConnectionDistance = 200
 
     // Set canvas size
@@ -30,10 +30,15 @@ function ConstellationCanvas() {
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
-    // Create stars
+    // Create stars with more concentration on the left side
     for (let i = 0; i < numStars; i++) {
+      // 60% of stars on left half, 40% on right half
+      const xPosition = Math.random() < 0.60 
+        ? Math.random() * (canvas.width * 0.5) 
+        : Math.random() * (canvas.width * 0.5) + (canvas.width * 0.5)
+      
       stars.push({
-        x: Math.random() * canvas.width,
+        x: xPosition,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
@@ -295,13 +300,12 @@ function Hero() {
 
       // CTA buttons with bounce
       gsap.from('.cta-button', {
-        y: 100,
+        y: 50,
         opacity: 0,
-        scale: 0.5,
-        rotation: -10,
+        scale: 0.9,
         duration: 1,
         stagger: 0.2,
-        ease: 'elastic.out(1, 0.6)',
+        ease: 'back.out(1.7)',
         delay: 1.2
       })
 
@@ -404,8 +408,6 @@ function Hero() {
             </div>
             <div className="hero-title-line">
               <span className="hero-word gradient">ENGINEER</span>
-            </div>
-            <div className="hero-title-line">
               <span className="hero-bracket">{'/>'}</span>
             </div>
           </div>

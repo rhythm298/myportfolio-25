@@ -175,6 +175,12 @@ function SpaceIntro({ onComplete }) {
 
   useEffect(() => {
     setShowTerminal(true)
+    
+    // Lock scrolling initially
+    const element = containerRef.current
+    if (element) {
+      element.style.overflow = 'hidden'
+    }
 
     // Listen for terminal completion
     const checkTerminal = setInterval(() => {
@@ -182,6 +188,11 @@ function SpaceIntro({ onComplete }) {
       if (terminalText && terminalText.textContent.includes('SYSTEM READY')) {
         setTerminalComplete(true)
         clearInterval(checkTerminal)
+        
+        // Unlock scrolling when terminal is ready
+        if (element) {
+          element.style.overflow = 'auto'
+        }
       }
     }, 100)
 
@@ -222,33 +233,80 @@ function SpaceIntro({ onComplete }) {
       })
 
       // Add scroll listener after terminal completes
-      const handleScroll = (e) => {
+      let isTransitioning = false
+      const MAX_SCROLL = 200 // Maximum allowed scroll before transition
+      
+      const handleScroll = () => {
         const element = containerRef.current
-        if (!element) return
+        if (!element || isTransitioning) return
         
         const scrollY = element.scrollTop
-        console.log('Scrolling:', scrollY) // Debug
         
-        if (scrollY > 100) {
-          console.log('Transitioning to main page') // Debug
-          gsap.to(element, {
-            opacity: 0,
-            scale: 1.1,
-            duration: 1.5,
-            ease: 'power3.inOut',
+        // Limit scroll extent
+        if (scrollY > MAX_SCROLL) {
+          element.scrollTop = MAX_SCROLL
+        }
+        
+        // Create 3D scroll effect based on scroll progress
+        const progress = Math.min(scrollY / 100, 1)
+        const canvas = element.querySelector('.space-intro-canvas')
+        const terminal = element.querySelector('.terminal')
+        
+        if (canvas) {
+          gsap.to(canvas, {
+            rotateX: progress * 20,
+            y: -scrollY * 0.8,
+            opacity: 1 - (progress * 0.4),
+            duration: 0.3,
+            ease: 'none'
+          })
+        }
+        
+        if (terminal) {
+          gsap.to(terminal, {
+            y: -scrollY * 1.2,
+            opacity: 1 - (progress * 0.6),
+            duration: 0.3,
+            ease: 'none'
+          })
+        }
+        
+        // Trigger transition when scroll reaches threshold
+        if (scrollY >= 100 && !isTransitioning) {
+          isTransitioning = true
+          element.style.overflow = 'hidden'
+          
+          // 3D transition animation
+          const tl = gsap.timeline({
             onComplete: () => {
-              console.log('Transition complete') // Debug
               onComplete()
             }
           })
-          element.removeEventListener('scroll', handleScroll)
+          
+          tl.to(canvas, {
+            rotateX: 90,
+            y: -300,
+            opacity: 0,
+            duration: 1.5,
+            ease: 'power2.inOut'
+          }, 0)
+          .to(terminal, {
+            y: -400,
+            opacity: 0,
+            duration: 1.5,
+            ease: 'power2.inOut'
+          }, 0)
+          .to(element, {
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.inOut'
+          }, 0.5)
         }
       }
 
       const element = containerRef.current
       if (element) {
         element.addEventListener('scroll', handleScroll, { passive: true })
-        console.log('Scroll listener attached') // Debug
       }
 
       return () => {
@@ -307,8 +365,8 @@ function SpaceIntro({ onComplete }) {
         </div>
       )}
       
-      {/* Spacer to enable scrolling */}
-      <div style={{ height: '150vh', pointerEvents: 'none' }}></div>
+      {/* Spacer to enable limited scrolling */}
+      <div style={{ height: '120vh', pointerEvents: 'none' }}></div>
     </div>
   )
 }

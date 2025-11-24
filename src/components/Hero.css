@@ -258,9 +258,10 @@
   margin-top: 6rem;
   padding-left: 5%;
   padding-right: 8%;
-  max-width: 45%;
+  max-width: 50%;
   margin-right: auto;
   margin-left: 0;
+  align-items: flex-start;
 }
 
 .hero-text {
@@ -344,24 +345,30 @@
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .cta-button {
   position: relative;
-  padding: 1rem 2.5rem;
+  padding: 1.25rem 3rem;
   font-family: 'Orbitron', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.125rem;
   border: none;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  opacity: 1;
-  visibility: visible;
-  border-radius: 8px;
+  justify-content: center;
+  gap: 0.75rem;
+  opacity: 1 !important;
+  visibility: visible !important;
+  border-radius: 10px;
+  z-index: 10;
+  min-height: 56px;
+  transform: rotate(0deg) !important;
 }
 
 .cta-button.primary {

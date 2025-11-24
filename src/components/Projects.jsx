@@ -115,95 +115,43 @@ function Projects() {
       // Section fade in
       gsap.from(projectsRef.current, {
         opacity: 0,
-        duration: 1.2,
+        duration: 1,
         ease: 'power2.inOut',
         immediateRender: false,
         scrollTrigger: {
           trigger: projectsRef.current,
           start: 'top 85%',
-          toggleActions: 'play none none reverse'
+          once: true
         }
       })
 
-      // Title with 3D perspective
+      // Title animation
       gsap.from('.projects-title', {
-        x: -150,
+        x: -100,
         opacity: 0,
-        rotationY: -90,
-        transformOrigin: 'left center',
-        duration: 1.3,
-        ease: 'back.out(1.7)',
+        duration: 1,
+        ease: 'power3.out',
         immediateRender: false,
         scrollTrigger: {
           trigger: projectsRef.current,
           start: 'top 80%',
-          toggleActions: 'play none none reverse'
+          once: true
         }
       })
 
-      gsap.from('.projects-title .title-number', {
-        scale: 0,
-        rotation: -720,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'elastic.out(1, 0.5)',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: projectsRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      gsap.from('.projects-title .title-line', {
-        scaleX: 0,
-        transformOrigin: 'left center',
-        duration: 1.5,
-        ease: 'power3.inOut',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: projectsRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Project cards with 3D flip
+      // Project cards with simple stagger
       gsap.from('.project-card', {
-        y: 120,
+        y: 80,
         opacity: 0,
-        rotationY: -90,
-        transformOrigin: 'center center',
-        scale: 0.85,
-        duration: 1.2,
-        stagger: {
-          each: 0.2,
-          from: 'start',
-          ease: 'power2.inOut'
-        },
-        ease: 'back.out(1.3)',
+        scale: 0.9,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out',
         immediateRender: false,
         scrollTrigger: {
           trigger: '.projects-grid',
           start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Project numbers with rotation
-      gsap.from('.project-number', {
-        scale: 0,
-        rotation: 720,
-        opacity: 0,
-        duration: 1.5,
-        stagger: 0.18,
-        delay: 0.3,
-        ease: 'elastic.out(1, 0.7)',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
+          once: true
         }
       })
 
@@ -213,119 +161,6 @@ function Projects() {
         duration: 20,
         repeat: -1,
         ease: 'none'
-      })
-
-      // Project titles reveal
-      gsap.from('.project-title', {
-        y: 30,
-        opacity: 0,
-        clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-        duration: 1,
-        stagger: 0.15,
-        delay: 0.5,
-        ease: 'power3.out',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      gsap.to('.project-title', {
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-        duration: 1,
-        stagger: 0.15,
-        delay: 0.5,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Project descriptions
-      gsap.from('.project-description', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        delay: 0.7,
-        ease: 'power2.out',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Tech tags wave animation
-      gsap.from('.tech-tag', {
-        y: 20,
-        opacity: 0,
-        scale: 0.9,
-        rotation: (index) => (index % 2 === 0 ? -5 : 5),
-        duration: 0.6,
-        stagger: 0.05,
-        delay: 0.9,
-        ease: 'back.out(1.7)',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Project links slide up
-      gsap.from('.project-link', {
-        y: 30,
-        opacity: 0,
-        scale: 0.95,
-        duration: 0.8,
-        stagger: 0.1,
-        delay: 1.1,
-        ease: 'back.out(1.5)',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Link arrows and icons
-      gsap.from('.link-arrow, .link-icon', {
-        x: -10,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        delay: 1.3,
-        ease: 'power2.out',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
-      })
-
-      // Project glow effect
-      gsap.from('.project-glow', {
-        opacity: 0,
-        scale: 0.8,
-        duration: 1.5,
-        stagger: 0.15,
-        delay: 1.2,
-        ease: 'power2.out',
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
       })
 
       // Continuous glow pulse
@@ -340,21 +175,6 @@ function Projects() {
           each: 0.3,
           from: 'random'
         }
-      })
-
-      // Individual card animations on scroll into view
-      document.querySelectorAll('.project-card').forEach((card, index) => {
-        gsap.from(card.querySelector('.project-content'), {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-          },
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          ease: 'power2.out'
-        })
       })
 
       // Parallax effects on canvas
