@@ -57,6 +57,39 @@ function SignatureIntro({ onComplete }) {
   useEffect(() => {
     if (!animationComplete) return
 
+    // Check if mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 968
+    
+    // Touch/Swipe handling for mobile
+    let touchStartY = 0
+    let touchEndY = 0
+    
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY
+    }
+    
+    const handleTouchMove = (e) => {
+      touchEndY = e.touches[0].clientY
+    }
+    
+    const handleTouchEnd = () => {
+      const swipeDistance = touchStartY - touchEndY
+      
+      // Detect swipe up (scroll down gesture) - small threshold for mobile
+      if (swipeDistance > 30) {
+        // Quick zoom transition on swipe
+        if (signatureRef.current) {
+          signatureRef.current.style.transform = 'scale(16)'
+          signatureRef.current.style.opacity = '0'
+          signatureRef.current.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out'
+        }
+        
+        setTimeout(() => {
+          onComplete()
+        }, 500)
+      }
+    }
+
     const handleWheel = (e) => {
       e.preventDefault()
       
@@ -83,10 +116,21 @@ function SignatureIntro({ onComplete }) {
       }
     }
 
-    window.addEventListener('wheel', handleWheel, { passive: false })
+    if (isMobile) {
+      // Mobile: Use touch events
+      window.addEventListener('touchstart', handleTouchStart, { passive: true })
+      window.addEventListener('touchmove', handleTouchMove, { passive: true })
+      window.addEventListener('touchend', handleTouchEnd, { passive: true })
+    } else {
+      // Desktop: Use wheel event
+      window.addEventListener('wheel', handleWheel, { passive: false })
+    }
 
     return () => {
       window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchmove', handleTouchMove)
+      window.removeEventListener('touchend', handleTouchEnd)
     }
   }, [animationComplete, onComplete])
 
@@ -97,9 +141,21 @@ function SignatureIntro({ onComplete }) {
       </div>
 
       {animationComplete && scrollProgress < 0.1 && (
-        <div className="scroll-hint-signature">
+        <div 
+          className="scroll-hint-signature"
+          onClick={() => {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 968
+            if (isMobile && signatureRef.current) {
+              signatureRef.current.style.transform = 'scale(16)'
+              signatureRef.current.style.opacity = '0'
+              signatureRef.current.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out'
+              setTimeout(() => onComplete(), 500)
+            }
+          }}
+          style={{ cursor: window.innerWidth < 968 ? 'pointer' : 'default' }}
+        >
           <div className="scroll-arrow">↓</div>
-          <span className="hint-text">Scroll Down</span>
+          <span className="hint-text">{window.innerWidth < 968 ? 'Swipe or Tap' : 'Scroll Down'}</span>
         </div>
       )}
     </div>

@@ -1,3 +1,9 @@
+/**
+ * Portfolio Application - Main Component
+ * Copyright (c) 2025 Rhythm Mehta. All rights reserved.
+ * This code is proprietary and confidential.
+ */
+
 import { useState, useEffect } from 'react'
 import CustomCursor from './components/CustomCursor'
 import SignatureIntro from './components/SignatureIntro'
@@ -9,6 +15,7 @@ import Skills from './components/Skills'
 import Projects from './components/Projects'
 import TechBadges from './components/TechBadges'
 import Contact from './components/Contact'
+import ProtectionLayer from './components/ProtectionLayer'
 import { initSmoothScroll } from './utils/smoothScroll'
 import './App.css'
 
@@ -24,6 +31,7 @@ function App() {
 
   return (
     <>
+      <ProtectionLayer />
       <CustomCursor />
       
       {!signatureComplete ? (
