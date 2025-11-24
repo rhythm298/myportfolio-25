@@ -5,6 +5,34 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 export function initSmoothScroll() {
+  // Disable smooth scroll on mobile/touch devices
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 968
+  
+  if (isMobile) {
+    // Just setup ScrollTrigger without Lenis on mobile
+    gsap.ticker.lagSmoothing(0)
+    
+    // Simple anchor link scrolling for mobile
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault()
+        const targetId = this.getAttribute('href')
+        if (targetId === '#') return
+        
+        const target = document.querySelector(targetId)
+        if (target) {
+          const targetPosition = target.offsetTop - 80
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          })
+        }
+      })
+    })
+    
+    return null
+  }
+  
   const lenis = new Lenis({
     duration: 1.8,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

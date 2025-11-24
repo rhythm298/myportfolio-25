@@ -232,9 +232,12 @@ function SpaceIntro({ onComplete }) {
         delay: 0.3
       })
 
+      // Check if mobile device
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 968
+
       // Add scroll listener after terminal completes
       let isTransitioning = false
-      const MAX_SCROLL = 200 // Maximum allowed scroll before transition
+      const MAX_SCROLL = isMobile ? 50 : 200 // Lower threshold for mobile
       
       const handleScroll = () => {
         const element = containerRef.current
@@ -247,60 +250,77 @@ function SpaceIntro({ onComplete }) {
           element.scrollTop = MAX_SCROLL
         }
         
-        // Create 3D scroll effect based on scroll progress
-        const progress = Math.min(scrollY / 100, 1)
-        const canvas = element.querySelector('.space-intro-canvas')
-        const terminal = element.querySelector('.terminal')
-        
-        if (canvas) {
-          gsap.to(canvas, {
-            rotateX: progress * 20,
-            y: -scrollY * 0.8,
-            opacity: 1 - (progress * 0.4),
-            duration: 0.3,
-            ease: 'none'
-          })
-        }
-        
-        if (terminal) {
-          gsap.to(terminal, {
-            y: -scrollY * 1.2,
-            opacity: 1 - (progress * 0.6),
-            duration: 0.3,
-            ease: 'none'
-          })
+        // Skip 3D effects on mobile for better performance
+        if (!isMobile) {
+          // Create 3D scroll effect based on scroll progress
+          const progress = Math.min(scrollY / 100, 1)
+          const canvas = element.querySelector('.space-intro-canvas')
+          const terminal = element.querySelector('.terminal')
+          
+          if (canvas) {
+            gsap.to(canvas, {
+              rotateX: progress * 20,
+              y: -scrollY * 0.8,
+              opacity: 1 - (progress * 0.4),
+              duration: 0.3,
+              ease: 'none'
+            })
+          }
+          
+          if (terminal) {
+            gsap.to(terminal, {
+              y: -scrollY * 1.2,
+              opacity: 1 - (progress * 0.6),
+              duration: 0.3,
+              ease: 'none'
+            })
+          }
         }
         
         // Trigger transition when scroll reaches threshold
-        if (scrollY >= 100 && !isTransitioning) {
+        const threshold = isMobile ? 30 : 100
+        if (scrollY >= threshold && !isTransitioning) {
           isTransitioning = true
           element.style.overflow = 'hidden'
           
-          // 3D transition animation
+          // Faster transition on mobile
+          const duration = isMobile ? 0.8 : 1.5
+          const canvas = element.querySelector('.space-intro-canvas')
+          const terminal = element.querySelector('.terminal')
+          
+          // Simple fade transition on mobile, 3D on desktop
           const tl = gsap.timeline({
             onComplete: () => {
               onComplete()
             }
           })
           
-          tl.to(canvas, {
-            rotateX: 90,
-            y: -300,
-            opacity: 0,
-            duration: 1.5,
-            ease: 'power2.inOut'
-          }, 0)
-          .to(terminal, {
-            y: -400,
-            opacity: 0,
-            duration: 1.5,
-            ease: 'power2.inOut'
-          }, 0)
-          .to(element, {
-            opacity: 0,
-            duration: 1,
-            ease: 'power2.inOut'
-          }, 0.5)
+          if (isMobile) {
+            tl.to(element, {
+              opacity: 0,
+              duration: 0.5,
+              ease: 'power2.inOut'
+            })
+          } else {
+            tl.to(canvas, {
+              rotateX: 90,
+              y: -300,
+              opacity: 0,
+              duration: duration,
+              ease: 'power2.inOut'
+            }, 0)
+            .to(terminal, {
+              y: -400,
+              opacity: 0,
+              duration: duration,
+              ease: 'power2.inOut'
+            }, 0)
+            .to(element, {
+              opacity: 0,
+              duration: 1,
+              ease: 'power2.inOut'
+            }, 0.5)
+          }
         }
       }
 

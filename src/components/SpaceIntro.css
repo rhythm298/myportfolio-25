@@ -10,6 +10,7 @@
   overflow-x: hidden;
   transition: opacity 1.5s ease, transform 1.5s ease;
   perspective: 1000px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .space-intro-container::-webkit-scrollbar {
