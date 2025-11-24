@@ -411,17 +411,61 @@
 }
 
 @media (max-width: 968px) {
+  .about-section {
+    padding: 4rem 0;
+  }
+  
+  .about-title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    margin-bottom: 2.5rem;
+  }
+  
+  .title-number {
+    font-size: 1.5rem;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .about-card {
+    padding: 1.5rem;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .about-card h3 {
+    font-size: 1.25rem;
+  }
+  
+  .about-card p {
+    font-size: 0.9rem;
+  }
+  
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 1rem;
+    padding-left: 1.5rem;
   }
 
   .timeline-date {
     grid-column: 1;
+    font-size: 1rem;
   }
 
   .timeline-content {
     grid-column: 1;
+  }
+  
+  .timeline-content h4 {
+    font-size: 1.125rem;
+  }
+  
+  .timeline-content p {
+    font-size: 0.9rem;
   }
 
   .timeline-animation {
@@ -431,10 +475,27 @@
   .about-content {
     grid-template-columns: 1fr;
     gap: 3rem;
+    margin-top: 3rem;
+  }
+  
+  .overview-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+  
+  .intro-text {
+    font-size: 1rem;
+  }
+  
+  .about-text p {
+    font-size: 0.9rem;
   }
   
   .about-canvas {
     width: 100%;
     opacity: 0.2;
+  }
+  
+  .timeline {
+    padding-left: 1.5rem;
   }
 }

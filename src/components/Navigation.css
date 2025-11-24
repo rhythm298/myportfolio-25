@@ -241,13 +241,52 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
+  .navigation {
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+  
   .nav-menu {
     display: none;
   }
   
   .space-button {
-    padding: 0.5rem 1rem;
+    padding: 0.625rem 1.25rem;
     font-size: 0.875rem;
+    min-width: 140px;
+  }
+  
+  .button-text {
+    min-width: 90px;
+    font-size: 0.875rem;
+  }
+  
+  .button-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    padding: 0.75rem 1rem;
+  }
+  
+  .nav-logo {
+    font-size: 1.125rem;
+  }
+  
+  .space-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    min-width: 120px;
+  }
+  
+  .button-text {
+    min-width: 80px;
+    font-size: 0.75rem;
   }
 }

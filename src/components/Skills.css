@@ -276,12 +276,47 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
+  .skills-section {
+    padding: 4rem 0;
+  }
+  
+  .skills-title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    margin-bottom: 2.5rem;
+  }
+  
   .skills-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .skill-card {
+    padding: 1.5rem;
+  }
+  
+  .skill-card h3 {
+    font-size: 1.25rem;
+  }
+  
+  .skill-list li {
+    font-size: 0.9rem;
   }
   
   .tools-title {
     font-size: 1.5rem;
+    margin-top: 3rem;
+  }
+  
+  .tool-tag {
+    font-size: 0.85rem;
+    padding: 0.625rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-tag {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
   }
 }
