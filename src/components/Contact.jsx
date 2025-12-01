@@ -633,7 +633,7 @@ function Contact() {
               <div className="info-icon">📧</div>
               <div className="info-content">
                 <h4>Email</h4>
-                <a href="mailto:rhythm@example.com">rhythm29@gmail.com</a>
+                <a href="mailto:rhythmmehta29@gmail.com">rhythmmehta29@gmail.com</a>
               </div>
             </div>
 
@@ -641,7 +641,7 @@ function Contact() {
               <div className="info-icon">🌐</div>
               <div className="info-content">
                 <h4>Location</h4>
-                <p>India, Earth, Milky Way Galaxy</p>
+                <p>India,                 "AI/ML Engineer & Full-Stack Developer | Building Intelligent Systems from Fraud Detection to Smart Cities"Earth, Milky Way Galaxy</p>
               </div>
             </div>
 

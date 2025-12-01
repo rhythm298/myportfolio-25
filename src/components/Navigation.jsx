@@ -3,8 +3,9 @@ import './Navigation.css'
 
 function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const [isDownloading, setIsDownloading] = useState(false)
-  const [downloadText, setDownloadText] = useState('Resume')
+  // TEMPORARILY DISABLED - Resume download functionality
+  // const [isDownloading, setIsDownloading] = useState(false)
+  // const [downloadText, setDownloadText] = useState('Resume')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,7 @@ function Navigation() {
     }
   }
 
+  /* TEMPORARILY DISABLED - Resume download handler
   const handleDownloadResume = () => {
     if (isDownloading) return
     
@@ -60,6 +62,7 @@ function Navigation() {
       }
     }, 600) // Change text every 600ms
   }
+  */
 
   return (
     <nav className={`navigation ${scrolled ? 'scrolled' : ''}`}>
@@ -93,7 +96,8 @@ function Navigation() {
           </li>
         </ul>
 
-        <button 
+        {/* TEMPORARILY DISABLED - Resume download button hidden */}
+        {/* <button 
           className={`space-button ${isDownloading ? 'downloading' : ''}`} 
           onClick={handleDownloadResume}
           disabled={isDownloading}
@@ -110,7 +114,7 @@ function Navigation() {
               <span></span>
             </span>
           )}
-        </button>
+        </button> */}
       </div>
     </nav>
   )
