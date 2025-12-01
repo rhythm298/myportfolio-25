@@ -641,7 +641,7 @@ function Contact() {
               <div className="info-icon">🌐</div>
               <div className="info-content">
                 <h4>Location</h4>
-                <p>India,                 "AI/ML Engineer & Full-Stack Developer | Building Intelligent Systems from Fraud Detection to Smart Cities"Earth, Milky Way Galaxy</p>
+                <p>India, Earth , Milky Way Galaxy</p>
               </div>
             </div>
 
