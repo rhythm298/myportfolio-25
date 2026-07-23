@@ -3,17 +3,46 @@ import './Navigation.css'
 
 function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  // TEMPORARILY DISABLED - Resume download functionality
-  // const [isDownloading, setIsDownloading] = useState(false)
-  // const [downloadText, setDownloadText] = useState('Resume')
+  const [activeSection, setActiveSection] = useState('hero')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  const navItems = [
+    { id: 'hero', number: '01', label: 'HOME' },
+    { id: 'about', number: '02', label: 'ABOUT' },
+    { id: 'skills', number: '03', label: 'SKILLS' },
+    { id: 'projects', number: '04', label: 'PROJECTS' },
+    { id: 'contact', number: '05', label: 'CONTACT' },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
+      setScrollProgress(window.scrollY / (document.documentElement.scrollHeight - window.innerHeight))
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' }
+    )
+
+    navItems.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
   }, [])
 
   const scrollToSection = (id) => {
@@ -21,102 +50,46 @@ function Navigation() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+    setMobileMenuOpen(false)
   }
-
-  /* TEMPORARILY DISABLED - Resume download handler
-  const handleDownloadResume = () => {
-    if (isDownloading) return
-    
-    setIsDownloading(true)
-    
-    // Animation sequence
-    const messages = [
-      'Crafting Resume',
-      'Compiling Skills',
-      'Adding Projects',
-      'Almost Ready',
-      'Downloading'
-    ]
-    
-    let index = 0
-    const interval = setInterval(() => {
-      if (index < messages.length) {
-        setDownloadText(messages[index])
-        index++
-      } else {
-        clearInterval(interval)
-        
-        // Trigger download
-        const link = document.createElement('a')
-        link.href = '/resume.pdf' // Place your resume.pdf in the public folder
-        link.download = 'Rhythm_Mehta_Resume.pdf'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        
-        // Reset after download
-        setTimeout(() => {
-          setDownloadText('Resume')
-          setIsDownloading(false)
-        }, 1000)
-      }
-    }, 600) // Change text every 600ms
-  }
-  */
 
   return (
-    <nav className={`navigation ${scrolled ? 'scrolled' : ''}`}>
-      <div className="nav-container">
-        <div className="nav-logo">
-          <span className="logo-bracket">{'<'}</span>
-          <span className="logo-text">RM</span>
-          <span className="logo-bracket">{'/>'}</span>
+    <>
+      <nav className={`navigation ${scrolled ? 'scrolled' : ''}`}>
+        <div className="nav-progress-bar" style={{ width: `${scrollProgress * 100}%` }} />
+        <div className="nav-container">
+          <div className="nav-logo" onClick={() => scrollToSection('hero')}>
+            <span className="logo-bracket">{'<'}</span>
+            <span className="logo-text">RM</span>
+            <span className="logo-bracket">{'/>'}</span>
+          </div>
+
+          <ul className={`nav-menu ${mobileMenuOpen ? 'open' : ''}`}>
+            {navItems.map((item) => (
+              <li
+                key={item.id}
+                className={activeSection === item.id ? 'active' : ''}
+                onClick={() => scrollToSection(item.id)}
+              >
+                <span className="nav-number">{item.number}</span>
+                <span className="nav-text">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            className={`nav-toggle ${mobileMenuOpen ? 'open' : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-
-        <ul className="nav-menu">
-          <li onClick={() => scrollToSection('hero')}>
-            <span className="nav-number">01</span>
-            <span className="nav-text">HOME</span>
-          </li>
-          <li onClick={() => scrollToSection('about')}>
-            <span className="nav-number">02</span>
-            <span className="nav-text">ABOUT</span>
-          </li>
-          <li onClick={() => scrollToSection('skills')}>
-            <span className="nav-number">03</span>
-            <span className="nav-text">SKILLS</span>
-          </li>
-          <li onClick={() => scrollToSection('projects')}>
-            <span className="nav-number">04</span>
-            <span className="nav-text">PROJECTS</span>
-          </li>
-          <li onClick={() => scrollToSection('contact')}>
-            <span className="nav-number">05</span>
-            <span className="nav-text">CONTACT</span>
-          </li>
-        </ul>
-
-        {/* TEMPORARILY DISABLED - Resume download button hidden */}
-        {/* <button 
-          className={`space-button ${isDownloading ? 'downloading' : ''}`} 
-          onClick={handleDownloadResume}
-          disabled={isDownloading}
-        >
-          <span className="button-content">
-            <span className="button-icon">🚀</span>
-            <span className="button-text">{downloadText}</span>
-          </span>
-          <span className="button-glow"></span>
-          {isDownloading && (
-            <span className="loading-dots">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          )}
-        </button> */}
-      </div>
-    </nav>
+      </nav>
+    </>
   )
 }
 

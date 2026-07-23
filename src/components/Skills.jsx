@@ -14,13 +14,13 @@ function Skills() {
     { name: 'JavaScript / ES6+', level: 90, icon: '⚡', color: '#F7DF1E' },
     { name: 'React / Next.js', level: 88, icon: '⚛️', color: '#61DAFB' },
     { name: 'Node.js / Express', level: 85, icon: '🟢', color: '#68A063' },
+    { name: 'MongoDB / PostgreSQL', level: 85, icon: '🗄️', color: '#4DB33D' },
     { name: 'Python / Flask', level: 92, icon: '🐍', color: '#3776AB' },
     { name: 'PyTorch / TensorFlow', level: 80, icon: '🔥', color: '#EE4C2C' },
     { name: 'OpenAI / Hugging Face', level: 78, icon: '🤖', color: '#10B981' },
-    { name: 'n8n Automation', level: 75, icon: '🔄', color: '#FF6D5A' },
-    { name: 'Docker / K8s', level: 72, icon: '🐳', color: '#2496ED' },
-    { name: 'PostgreSQL / MongoDB', level: 85, icon: '🗄️', color: '#4DB33D' },
-    { name: 'Git / GitHub Actions', level: 90, icon: '📦', color: '#F05032' },
+    { name: 'n8n / Automation', level: 75, icon: '🔄', color: '#FF6D5A' },
+    { name: 'Data Science / ML', level: 82, icon: '📊', color: '#F7931E' },
+    { name: 'Cybersecurity Basics', level: 70, icon: '🛡️', color: '#EF4444' },
   ]
 
   useEffect(() => {

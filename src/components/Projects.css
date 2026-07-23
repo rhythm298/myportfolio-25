@@ -37,11 +37,16 @@
 
 .project-card {
   position: relative;
-  background: rgba(10, 14, 39, 0.8);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
   padding: 2.5rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: border-color 0.4s var(--ease-premium),
+              box-shadow 0.4s var(--ease-premium),
+              transform 0.4s var(--ease-premium);
   overflow: hidden;
   cursor: pointer;
   scroll-snap-align: start;
@@ -94,11 +99,11 @@
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  border-color: var(--accent-color);
-  box-shadow: 
+  border-color: var(--glass-border-hover);
+  box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.5),
     0 0 40px var(--accent-color);
+  transform: translateY(-10px);
 }
 
 .project-card.zoomed {

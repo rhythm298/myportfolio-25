@@ -59,15 +59,17 @@
   padding: 1.5rem 2rem;
   min-width: 140px;
   height: 140px;
-  background: rgba(99, 102, 241, 0.08);
-  border: 2px solid rgba(99, 102, 241, 0.3);
-  border-radius: 16px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s var(--ease-premium);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-  backdrop-filter: blur(10px);
   opacity: 1 !important;
   visibility: visible !important;
 }

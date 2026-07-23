@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   padding: 6rem 0;
-  background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+  background: linear-gradient(180deg, var(--space-dark) 0%, #1a1f3a 100%);
   overflow: hidden;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .title-number {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   color: var(--space-cyan);
   font-size: 2rem;
 }
@@ -49,41 +49,10 @@
 }
 
 .about-card {
-  background: rgba(99, 102, 241, 0.05);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 16px;
   padding: 2rem;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
 }
 
-.about-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(99, 102, 241, 0.1), 
-    transparent
-  );
-  transition: left 0.6s ease;
-}
-
-.about-card:hover::before {
-  left: 100%;
-}
-
-.about-card:hover {
-  transform: translateY(-10px);
-  border-color: var(--space-cyan);
-  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
-}
-
-.card-icon {
+.about-card .card-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
@@ -95,7 +64,7 @@
 }
 
 .about-card p {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
 }
@@ -108,7 +77,7 @@
 }
 
 .section-label {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: var(--space-cyan);
   text-transform: uppercase;
@@ -131,7 +100,7 @@
 
 .intro-text {
   font-size: 1.25rem;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   line-height: 1.8;
 }
 
@@ -152,7 +121,7 @@
 }
 
 .about-text p {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.8;
   font-size: 1rem;
@@ -194,10 +163,10 @@
   background: var(--space-cyan);
   border-radius: 50%;
   box-shadow: 0 0 20px var(--space-cyan);
-  animation: pulse 2s ease-in-out infinite;
+  animation: timelinePulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes timelinePulse {
   0%, 100% {
     transform: scale(1);
     box-shadow: 0 0 20px var(--space-cyan);
@@ -209,7 +178,7 @@
 }
 
 .timeline-date {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.25rem;
   color: var(--space-pink);
@@ -227,8 +196,48 @@
   margin-bottom: 0.5rem;
 }
 
+.timeline-company {
+  font-family: var(--font-body) !important;
+  color: var(--space-cyan) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600;
+  margin-bottom: 0.25rem !important;
+}
+
+.timeline-period {
+  font-family: var(--font-body) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.8rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.timeline-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline-bullets li {
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.timeline-bullets li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--space-cyan);
+}
+
 .timeline-content p {
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
 }
@@ -247,12 +256,48 @@
   border-radius: 8px;
 }
 
+/* MERN Stack Animation (2025-26 Internship) */
+.mern-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  align-items: center;
+}
+
+.stack-letter {
+  display: inline-block;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: stackPop 2s ease-in-out infinite;
+}
+
+.stack-letter:nth-child(1) { animation-delay: 0s; }
+.stack-letter:nth-child(2) { animation-delay: 0.2s; }
+.stack-letter:nth-child(3) { animation-delay: 0.4s; }
+.stack-letter:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes stackPop {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2) translateY(-3px);
+    opacity: 1;
+  }
+}
+
 /* Code Lines Animation (2025 Freelancing) */
 .code-lines {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   font-size: 0.7rem;
 }
 
@@ -262,17 +307,9 @@
   animation: typeLine 3s ease-in-out infinite;
 }
 
-.code-line:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.code-line:nth-child(2) {
-  animation-delay: 1s;
-}
-
-.code-line:nth-child(3) {
-  animation-delay: 2s;
-}
+.code-line:nth-child(1) { animation-delay: 0s; }
+.code-line:nth-child(2) { animation-delay: 1s; }
+.code-line:nth-child(3) { animation-delay: 2s; }
 
 @keyframes typeLine {
   0%, 20% {
@@ -309,22 +346,9 @@
   animation: neuronPulse 2s ease-in-out infinite;
 }
 
-.neuron:nth-child(1) {
-  top: 20%;
-  left: 30%;
-}
-
-.neuron:nth-child(2) {
-  top: 50%;
-  left: 50%;
-  animation-delay: 0.3s;
-}
-
-.neuron:nth-child(3) {
-  top: 70%;
-  left: 30%;
-  animation-delay: 0.6s;
-}
+.neuron:nth-child(1) { top: 20%; left: 30%; }
+.neuron:nth-child(2) { top: 50%; left: 50%; animation-delay: 0.3s; }
+.neuron:nth-child(3) { top: 70%; left: 30%; animation-delay: 0.6s; }
 
 .connection {
   position: absolute;
@@ -349,26 +373,14 @@
 }
 
 @keyframes neuronPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 1;
-  }
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
 }
 
 @keyframes connectionFlow {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.3;
-  }
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 }
 
 /* Typing Code Animation (2021 Web Developer) */
@@ -377,7 +389,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Space Mono', monospace;
+  font-family: var(--font-body);
   font-size: 1rem;
 }
 
@@ -393,58 +405,50 @@
 }
 
 @keyframes typing {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 @keyframes rotate {
-  0%, 100% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(180deg);
-  }
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
 }
 
 @media (max-width: 968px) {
   .about-section {
     padding: 4rem 0;
   }
-  
+
   .about-title {
     font-size: clamp(1.75rem, 7vw, 2.5rem);
     margin-bottom: 2.5rem;
   }
-  
+
   .title-number {
     font-size: 1.5rem;
   }
-  
+
   .about-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .about-card {
     padding: 1.5rem;
   }
-  
+
   .card-icon {
     font-size: 2.5rem;
   }
-  
+
   .about-card h3 {
     font-size: 1.25rem;
   }
-  
+
   .about-card p {
     font-size: 0.9rem;
   }
-  
+
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -459,42 +463,43 @@
   .timeline-content {
     grid-column: 1;
   }
-  
+
   .timeline-content h4 {
     font-size: 1.125rem;
   }
-  
-  .timeline-content p {
-    font-size: 0.9rem;
+
+  .timeline-content p,
+  .timeline-bullets li {
+    font-size: 0.85rem;
   }
 
   .timeline-animation {
     display: none;
   }
-  
+
   .about-content {
     grid-template-columns: 1fr;
     gap: 3rem;
     margin-top: 3rem;
   }
-  
+
   .overview-title {
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
-  
+
   .intro-text {
     font-size: 1rem;
   }
-  
+
   .about-text p {
     font-size: 0.9rem;
   }
-  
+
   .about-canvas {
     width: 100%;
     opacity: 0.2;
   }
-  
+
   .timeline {
     padding-left: 1.5rem;
   }

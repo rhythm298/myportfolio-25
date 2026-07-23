@@ -8,7 +8,7 @@
  * Unauthorized copying, modification, distribution, or use of this code,
  * via any medium, is strictly prohibited without explicit written permission.
  * 
- * For inquiries: rhythm29@gmail.com
+ * For inquiries: rhythmmehta29@gmail.com
  */
 
 import React from 'react'

@@ -23,11 +23,16 @@
 }
 
 .skill-card {
-  background: rgba(99, 102, 241, 0.05);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.4s var(--ease-premium),
+              box-shadow 0.4s var(--ease-premium),
+              transform 0.4s var(--ease-premium);
   position: relative;
   overflow: hidden;
 }
@@ -53,8 +58,8 @@
 
 .skill-card:hover {
   transform: translateY(-5px);
-  border-color: var(--space-cyan);
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-hover);
 }
 
 .skill-header {

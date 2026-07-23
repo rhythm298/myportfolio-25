@@ -2,33 +2,58 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 1000;
-  padding: 1.5rem 2rem;
-  transition: all 0.3s ease;
+  transition: all 0.4s var(--ease-premium);
 }
 
-.navigation.scrolled {
-  background: rgba(10, 14, 39, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+.nav-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-aurora);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
+  transition: width 0.1s linear;
+  z-index: 10;
 }
 
 .nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
   max-width: 1400px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  transition: all 0.4s var(--ease-premium);
+}
+
+/* Glassmorphism on scroll */
+.navigation.scrolled {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.navigation.scrolled .nav-container {
+  padding: 1rem 3rem;
 }
 
 .nav-logo {
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: 1.5rem;
-  font-weight: 900;
-  display: flex;
-  gap: 0.3rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
 }
 
 .logo-bracket {
@@ -36,257 +61,145 @@
 }
 
 .logo-text {
-  background: linear-gradient(135deg, var(--space-purple), var(--space-pink));
+  background: var(--gradient-text);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .nav-menu {
   display: flex;
-  gap: 2rem;
   list-style: none;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.5rem;
+  background: rgba(10, 14, 39, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  transition: all 0.4s var(--ease-premium);
 }
 
 .nav-menu li {
-  cursor: pointer;
-  position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.nav-menu li:hover {
-  transform: translateY(-2px);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s var(--ease-premium);
+  position: relative;
 }
 
 .nav-number {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  color: var(--space-cyan);
+  opacity: 0.7;
+}
+
+.nav-menu li:hover {
+  color: var(--white);
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.nav-menu li.active {
+  color: var(--white);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(99, 102, 241, 0.2));
+  box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+.nav-menu li.active .nav-number {
+  opacity: 1;
   color: var(--space-cyan);
 }
 
-.nav-text {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--white);
-  position: relative;
-}
-
-.nav-menu li:hover .nav-text::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--space-cyan), var(--space-purple));
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* Space Button */
-.space-button {
-  position: relative;
-  padding: 0.75rem 2rem;
-  background: transparent;
-  border: 2px solid var(--space-purple);
-  color: var(--white);
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
   cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border-radius: 8px;
-  opacity: 1;
-  visibility: visible;
-  min-width: 180px;
+  padding: 0.5rem;
+  z-index: 1001;
 }
 
-.space-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.8;
+.nav-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s var(--ease-premium);
 }
 
-.button-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
 }
 
-.button-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
 }
 
-.button-text {
-  white-space: nowrap;
-  min-width: 120px;
-  text-align: center;
-}
-
-.space-button:hover .button-icon {
-  transform: translateX(3px) rotate(-15deg);
-}
-
-.space-button.downloading .button-icon {
-  animation: rocketLaunch 0.6s ease-in-out infinite;
-}
-
-@keyframes rocketLaunch {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-5px) rotate(-20deg);
-  }
-}
-
-.loading-dots {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 4px;
-  z-index: 3;
-}
-
-.loading-dots span {
-  width: 4px;
-  height: 4px;
-  background: var(--space-cyan);
-  border-radius: 50%;
-  animation: dotBounce 1.4s infinite ease-in-out;
-}
-
-.loading-dots span:nth-child(1) {
-  animation-delay: -0.32s;
-}
-
-.loading-dots span:nth-child(2) {
-  animation-delay: -0.16s;
-}
-
-@keyframes dotBounce {
-  0%, 80%, 100% {
-    transform: scale(0);
-    opacity: 0.5;
-  }
-  40% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.button-glow {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(99, 102, 241, 0.4), 
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.space-button:hover .button-glow {
-  left: 100%;
-}
-
-.space-button:hover:not(:disabled) {
-  border-color: var(--space-cyan);
-  box-shadow: 
-    0 0 20px rgba(99, 102, 241, 0.5),
-    inset 0 0 20px rgba(99, 102, 241, 0.2);
-  transform: translateY(-2px);
-}
-
-.space-button.downloading {
-  border-color: var(--space-cyan);
-  box-shadow: 
-    0 0 30px rgba(6, 182, 212, 0.6),
-    inset 0 0 20px rgba(6, 182, 212, 0.2);
-  animation: buttonPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes buttonPulse {
-  0%, 100% {
-    box-shadow: 
-      0 0 30px rgba(6, 182, 212, 0.6),
-      inset 0 0 20px rgba(6, 182, 212, 0.2);
-  }
-  50% {
-    box-shadow: 
-      0 0 40px rgba(6, 182, 212, 0.8),
-      inset 0 0 30px rgba(6, 182, 212, 0.3);
-  }
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 @media (max-width: 968px) {
-  .navigation {
+  .nav-container {
     padding: 1rem 1.5rem;
   }
-  
-  .nav-logo {
-    font-size: 1.25rem;
-  }
-  
+
   .nav-menu {
-    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    border-radius: 20px 0 0 20px;
+    transition: right 0.4s var(--ease-premium);
   }
-  
-  .space-button {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
-    min-width: 140px;
+
+  .nav-menu.open {
+    right: 0;
+    border-radius: 0;
   }
-  
-  .button-text {
-    min-width: 90px;
-    font-size: 0.875rem;
+
+  .nav-menu li {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
   }
-  
-  .button-icon {
-    font-size: 1rem;
+
+  .nav-number {
+    font-size: 0.9rem;
+  }
+
+  .nav-toggle {
+    display: flex;
   }
 }
 
 @media (max-width: 480px) {
-  .navigation {
+  .nav-container {
     padding: 0.75rem 1rem;
   }
-  
+
   .nav-logo {
-    font-size: 1.125rem;
-  }
-  
-  .space-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-    min-width: 120px;
-  }
-  
-  .button-text {
-    min-width: 80px;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
   }
 }

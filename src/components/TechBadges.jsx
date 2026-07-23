@@ -39,7 +39,11 @@ function TechBadges() {
     { name: 'Whisper', icon: '🎤', color: '#10B981' },
     { name: 'BERT', icon: '📝', color: '#4285F4' },
     { name: 'scikit-learn', icon: '📊', color: '#F7931E' },
-    { name: 'Plotly', icon: '📈', color: '#3F4F75' }
+    { name: 'Plotly', icon: '📈', color: '#3F4F75' },
+    { name: 'Express', icon: '🚂', color: '#000000' },
+    { name: 'JWT', icon: '🔐', color: '#D63AFF' },
+    { name: 'Kali Linux', icon: '🐉', color: '#367BF0' },
+    { name: 'OWASP', icon: '🛡️', color: '#000000' }
   ]
 
   useEffect(() => {
